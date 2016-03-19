@@ -69,3 +69,7 @@ project/plugins/project/
 .worksheet
 
 .cache-main
+
+src/main/resources/reference.conf
+data/*
+!data/sample*
