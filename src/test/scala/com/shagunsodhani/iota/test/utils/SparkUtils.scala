@@ -1,9 +1,9 @@
-package main.test.utils
+package com.shagunsodhani.iota.test.utils
 
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
 import org.junit.Test
-import main.scala.utils.SparkContextUtils
+import com.shagunsodhani.iota.utils.SparkContextUtils
 
 @Test
 class TestSparkContexUtils {

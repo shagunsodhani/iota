@@ -1,4 +1,4 @@
-package main.scala.utils
+package com.shagunsodhani.iota.utils
 
 import java.net.InetAddress
 
