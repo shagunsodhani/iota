@@ -1,0 +1,5 @@
+cluster.spark.master="local"
+spark.executor.memory="2g"
+spark.cores.max="3"
+app.name="iota"
+user.data.path="/home/shagun/projects/iota/data/sampleUsers.xml"
