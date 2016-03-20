@@ -28,7 +28,7 @@ object SparkContextUtils {
       .set(SPARK_EXECUTOR_MEMORY, Config.getString(SPARK_EXECUTOR_MEMORY))
       .set(SPARK_CORES_MAX, Config.getString(SPARK_CORES_MAX))
 
-    new SparkContext(conf)
+    SparkContext.getOrCreate(conf)
   }
 
 }
