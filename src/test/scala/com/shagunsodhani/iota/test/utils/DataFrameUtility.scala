@@ -16,6 +16,12 @@ class TestDataFrameUtility {
     val sc = SparkContextUtils.getContext()
     val userDF = DataFrameUtility.getUserDataFrame(sc)
     assert(userDF.collect().count(x=>x.getAs[Long]("Id")!=0) == 10)
+    
+    val questionDF = DataFrameUtility.getQuestionDataFrame(sc)
+    assert(questionDF.collect().count(x=>x.getAs[Long]("Id")!=0) == 10)
+    
+    val answerDF = DataFrameUtility.getAnswerDataFrame(sc)
+    assert(answerDF.collect().count(x=>x.getAs[Long]("Id")!=0) == 7)
   }
 
 }

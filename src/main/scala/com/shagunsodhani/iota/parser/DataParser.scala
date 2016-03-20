@@ -13,7 +13,8 @@ trait DataParser {
       (xml \ "@".concat(attributeName)).text.toLong
     } catch {
       case ex: NumberFormatException =>
-        println(s"failed to parse " + attributeName + " in line: $xml.text")
+        println("failed to parse " + attributeName + " in line: "+xml.toString())
+        println("===============================================================")
         defaultValue
     }
   }
