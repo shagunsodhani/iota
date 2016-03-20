@@ -1,9 +1,6 @@
 package com.shagunsodhani.iota.parser
 
 import scala.xml.Elem
-import scala.xml.XML
-
-import com.shagunsodhani.iota.schema.User
 
 trait DataParser {
 

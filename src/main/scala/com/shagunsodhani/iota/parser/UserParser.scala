@@ -11,23 +11,35 @@ object UserParser extends DataParser {
   def parseUser(row: String): User = {
     val xml: Elem = XML.loadString(row)
 
-    val id: Long = _parseAsLong(xml, "Id")
-    val reputation: Long = _parseAsLong(xml, "Reputation", -1)
-    val creationDate = (xml \ "@CreationDate").text.toString
-    val displayName = (xml \ "@DisplayName").text.toString
-    val emailHash = (xml \ "@EmailHash").text.toString
-    val lastAccessDate = (xml \ "@LastAccessDate").text.toString
-    val websiteUrl = (xml \ "@WebsiteUrl").text.toString
-    val location = (xml \ "@Location").text.toString
-    val age = _parseAsLong(xml, "Age", -1)
-    val aboutMe = (xml \ "@AboutMe").text.toString
-    val views = _parseAsLong(xml, "Views", -1)
-    val upVotes = _parseAsLong(xml, "UpVotes", -1)
-    val downvotes = _parseAsLong(xml, "DownVotes", -1)
-    val accountId = _parseAsLong(xml, "AccountId", 0)
+    val Id: Long = _parseAsLong(xml, "Id", -2) //-1 is reserved for admin user
+    val Reputation: Long = _parseAsLong(xml, "Reputation", Long.MinValue)
+    val CreationDate = (xml \ "@CreationDate").text.toString
+    val DisplayName = (xml \ "@DisplayName").text.toString
+    val EmailHash = (xml \ "@EmailHash").text.toString
+    val LastAccessDate = (xml \ "@LastAccessDate").text.toString
+    val WebsiteUrl = (xml \ "@WebsiteUrl").text.toString
+    val Location = (xml \ "@Location").text.toString
+    val Age = _parseAsLong(xml, "Age", -1)
+    val AboutMe = (xml \ "@AboutMe").text.toString
+    val Views = _parseAsLong(xml, "Views", -1)
+    val UpVotes = _parseAsLong(xml, "UpVotes", -1)
+    val DownVotes = _parseAsLong(xml, "DownVotes", -1)
+    val AccountId = _parseAsLong(xml, "AccountId", -2) //-1 is reserved for admin user
 
-    User(id, reputation, creationDate, displayName, emailHash, lastAccessDate,
-      websiteUrl, location, age, aboutMe, views, upVotes, downvotes, accountId)
+    User(Id,
+      Reputation,
+      CreationDate,
+      DisplayName,
+      EmailHash,
+      LastAccessDate,
+      WebsiteUrl,
+      Location,
+      Age,
+      AboutMe,
+      Views,
+      UpVotes,
+      DownVotes,
+      AccountId)
   }
 
 }
