@@ -6,6 +6,7 @@ import org.apache.spark.sql.SQLContext
 import com.shagunsodhani.iota.parser.DataParser
 import com.shagunsodhani.iota.schema.User
 import com.typesafe.config.ConfigFactory
+import com.shagunsodhani.iota.parser.UserParser
 
 object DataFrameUtility {
   
@@ -17,8 +18,8 @@ object DataFrameUtility {
     import sqlContext.implicits._
     sc.textFile(path, 2)
       .map(_.trim)
-      .filter(DataParser.isValidRow)
-      .map(DataParser.parseUser)
+      .filter(UserParser.isValidRow)
+      .map(UserParser.parseUser)
       .toDF()
   }
 }
