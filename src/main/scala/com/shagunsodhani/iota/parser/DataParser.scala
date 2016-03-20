@@ -8,15 +8,16 @@ trait DataParser {
     row.startsWith("<row Id=")
   }
 
-  protected def _parseAsLong(xml: Elem, attributeName: String, defaultValue: Long = 0) = {
+  protected def _parseAsLong(xml: Elem, attributeName: String, defaultValue: Long = 0, debug: Boolean = false) = {
     try {
       (xml \ "@".concat(attributeName)).text.toLong
     } catch {
       case ex: NumberFormatException =>
-        println("failed to parse " + attributeName + " in line: "+xml.toString())
-        println("===============================================================")
+        if(debug==true){
+          println("failed to parse " + attributeName + " in line: "+xml.toString())
+          println("===============================================================")
+        }
         defaultValue
     }
   }
-
 }
