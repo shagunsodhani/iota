@@ -9,15 +9,15 @@ import com.typesafe.config.ConfigFactory
 
 object SparkContextUtils {
 
-  val Config = ConfigFactory.load
+  private val Config = ConfigFactory.load
 
-  val FILE_SEP = System.getProperty("file.separator")
-  val LOCAL_IP_ADDRESS = InetAddress.getLocalHost().getHostAddress()
-  val SPARK_DRIVER_HOST = "spark.driver.host"
-  val SPARK_EXECUTOR_MEMORY = "spark.executor.memory"
-  val SPARK_CORES_MAX = "spark.cores.max"
-  val CLUSTER_SPARK_MASTER = "cluster.spark.master"
-  val APP_NAME = "app.name"
+  private val FILE_SEP = System.getProperty("file.separator")
+  private val LOCAL_IP_ADDRESS = InetAddress.getLocalHost().getHostAddress()
+  private val SPARK_DRIVER_HOST = "spark.driver.host"
+  private val SPARK_EXECUTOR_MEMORY = "spark.executor.memory"
+  private val SPARK_CORES_MAX = "spark.cores.max"
+  private val CLUSTER_SPARK_MASTER = "cluster.spark.master"
+  private val APP_NAME = "app.name"
 
   def getContext() = {
 

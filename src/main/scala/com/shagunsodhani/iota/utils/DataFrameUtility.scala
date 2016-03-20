@@ -9,7 +9,7 @@ import com.typesafe.config.ConfigFactory
 
 object DataFrameUtility {
   
-  val userDataPath = ConfigFactory.load.getString("user.data.path")
+  private val userDataPath = ConfigFactory.load.getString("user.data.path")
   
   def getUserDataFrame(sc: SparkContext, 
       path: String = userDataPath) = {
@@ -19,21 +19,6 @@ object DataFrameUtility {
       .map(_.trim)
       .filter(DataParser.isValidRow)
       .map(DataParser.parseUser)
-      //     Some users have blank accountid. This condition takes care of that.
-      .filter(!_.last.isEmpty())
-      .map {
-        user =>
-          try {
-            User(user(0).toLong, user(1).toLong, user(2), user(3).toLong, 
-                user(4).toLong, user(5).toLong, user(6).toLong)
-          } catch {
-            case ex: Exception ⇒
-              println(s"failed to parse line: $user")
-              User(0, 0, "", 0, 0, 0, 0)
-//              All erroneous records are replaced by this placeholder record. 
-//              Can be filtered later as required by the application logic.
-          }
-      }.toDF()
-
+      .toDF()
   }
 }

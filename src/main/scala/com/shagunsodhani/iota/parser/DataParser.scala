@@ -1,29 +1,47 @@
 package com.shagunsodhani.iota.parser
 
+import scala.xml.Elem
 import scala.xml.XML
+
+import com.shagunsodhani.iota.schema.User
 
 object DataParser {
 
   def isValidRow(row: String): Boolean = {
     row.startsWith("<row Id=")
   }
-  
-  def parseUser(row: String): List[String] = {
+
+  private def _parseAsLong(xml: Elem, attributeName: String, defaultValue: Long = 0) = {
     try {
-      val xml = XML.loadString(row)
-      val id = (xml \ "@Id").text.toString
-      val reputation = (xml \ "@Reputation").text.toString
-      val displayName = (xml \ "@DisplayName").text.toString
-      val views = (xml \ "@Views").text.toString
-      val upVotes = (xml \ "@UpVotes").text.toString
-      val downvotes = (xml \ "@DownVotes").text.toString
-      val accountId = (xml \ "@AccountId").text.toString
-    List(id, reputation, displayName, views, upVotes, downvotes, accountId)
+      (xml \ "@".concat(attributeName)).text.toLong
     } catch {
-      case ex: Exception ⇒
-        println(s"failed to parse line: $row")
-        Nil
+      case ex: NumberFormatException =>
+        println(s"failed to parse " + attributeName + " in line: $xml.text")
+        defaultValue
     }
   }
+
+//  @to-d0: parse date as DateTime and not string
+  def parseUser(row: String): User = {
+    val xml: Elem = XML.loadString(row)
     
+    val id: Long = _parseAsLong(xml, "Id")
+    val reputation: Long = _parseAsLong(xml, "Reputation", -1)
+    val creationDate = (xml \ "@CreationDate").text.toString
+    val displayName = (xml \ "@DisplayName").text.toString
+    val emailHash = (xml \ "@EmailHash").text.toString
+    val lastAccessDate = (xml \ "@LastAccessDate").text.toString
+    val websiteUrl = (xml \ "@WebsiteUrl").text.toString
+    val location = (xml \ "@Location").text.toString
+    val age = _parseAsLong(xml, "Age", -1)
+    val aboutMe = (xml \ "@AboutMe").text.toString
+    val views = _parseAsLong(xml, "Views", -1)
+    val upVotes = _parseAsLong(xml, "UpVotes", -1)
+    val downvotes = _parseAsLong(xml, "DownVotes", -1)
+    val accountId = _parseAsLong(xml, "AccountId", 0)
+
+    User(id, reputation, creationDate, displayName, emailHash, lastAccessDate,
+      websiteUrl, location, age, aboutMe, views, upVotes, downvotes, accountId)
+  }
+
 }
