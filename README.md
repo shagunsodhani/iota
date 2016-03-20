@@ -20,6 +20,6 @@ All the StackExchange sites use a common schema for their data. So a common pipe
 
 1. Run `$SPARK_HOME/bin/spark-shell --jars target/uber-iota-0.0.1-SNAPSHOT.jar`
 2. Run `import com.shagunsodhani.iota.utils.DataFrameUtility` in the scala REPL.
-3. Run `val userDF = DataFrameUtility.getUserDataFrame(sc, PATH_TO_USER_FILE)` to load UserDataFrame. Other avilable functions are `getQuestionDataFrame(sc, PATH_TO_POST_FILE)` and `getUserDataFrame(sc, PATH_TO_POST_FILE)`
+3. Run `val userDF = DataFrameUtility.getUserDataFrame(sc, PATH_TO_USER_FILE)` to load UserDataFrame. Other avilable functions are `getQuestionDataFrame(sc, PATH_TO_POST_FILE)` and `getAnswerDataFrame(sc, PATH_TO_POST_FILE)`
 
 For now only user and post schema are mapped. Other data (Badges, PostHistory etc.) can be easily mapped.
