@@ -2,12 +2,19 @@ package com.shagunsodhani.iota.parser
 
 import scala.xml.Elem
 import scala.xml.XML
-import com.shagunsodhani.iota.schema.Question
+
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
 import com.shagunsodhani.iota.schema.Answer
+import com.shagunsodhani.iota.schema.Question
 
 object PostParser extends DataParser {
 
+  private val logger: Logger = LoggerFactory.getLogger(getClass)
+
   def isQuestion(row: String): Boolean = {
+    logger.debug("Checking if the input row is a question or not")
     val xml: Elem = XML.loadString(row)
     val postTypeId: String = (xml \ "@PostTypeId").text.toString
     postTypeId == "1"
@@ -15,6 +22,7 @@ object PostParser extends DataParser {
 
   //  @to-do: parse date as DateTime and not string
   def parseQuestion(row: String): Question = {
+    logger.debug("Parsing row for question data")
     val xml: Elem = XML.loadString(row)
     val Id: Long = _parseAsLong(xml, "Id", -1)
     val AcceptedAnswerId: Long = _parseAsLong(xml, "AcceptedAnswer", -1)
@@ -56,12 +64,14 @@ object PostParser extends DataParser {
   }
 
   def isAnswer(row: String): Boolean = {
+    logger.debug("Checking if the input row is an answer or not")
     val xml: Elem = XML.loadString(row)
     val postTypeId: String = (xml \ "@PostTypeId").text.toString
     postTypeId == "2"
   }
-  
+
   def parseAnswer(row: String): Answer = {
+    logger.debug("Parsing row for answer data")
     val xml: Elem = XML.loadString(row)
     val Id: Long = _parseAsLong(xml, "Id", -1)
     val ParentID: Long = _parseAsLong(xml, "ParentID", -1)

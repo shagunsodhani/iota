@@ -3,12 +3,17 @@ package com.shagunsodhani.iota.parser
 import scala.xml.Elem
 import scala.xml.XML
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
 import com.shagunsodhani.iota.schema.User
 
 object UserParser extends DataParser {
+  private val logger: Logger = LoggerFactory.getLogger(getClass)
 
   //  @to-do: parse date as DateTime and not string
   def parseUser(row: String): User = {
+    logger.debug("Parsing row for user data")
     val xml: Elem = XML.loadString(row)
 
     val Id: Long = _parseAsLong(xml, "Id", -2) //-1 is reserved for admin user

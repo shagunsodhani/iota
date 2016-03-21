@@ -4,12 +4,15 @@ import java.net.InetAddress
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import com.typesafe.config.ConfigFactory
 
 object SparkContextUtils {
 
   private val Config = ConfigFactory.load
+  private val logger: Logger = LoggerFactory.getLogger(getClass)
 
   private val FILE_SEP = System.getProperty("file.separator")
   private val LOCAL_IP_ADDRESS = InetAddress.getLocalHost().getHostAddress()
@@ -20,6 +23,8 @@ object SparkContextUtils {
   private val APP_NAME = "app.name"
 
   def getContext() = {
+
+    logger.debug("Creating SparkContext")
 
     val conf = new SparkConf()
     conf.setAppName(Config.getString(APP_NAME))
