@@ -15,7 +15,7 @@ import com.typesafe.config.ConfigFactory
 object DataFrameUtility {
 
   private val logger: Logger = LoggerFactory.getLogger(getClass)
-
+  private val XML = "xml"
   private val userDataPath = ConfigFactory.load.getString("user.data.path")
   private val postDataPath = ConfigFactory.load.getString("post.data.path")
 
@@ -24,11 +24,15 @@ object DataFrameUtility {
     logger.debug("Creating User DataFrame")
     val sqlContext = SQLContext.getOrCreate(sc)
     import sqlContext.implicits._
-    sc.textFile(userDataPath, 2)
-      .map(_.trim)
-      .filter(UserParser.isValidRow)
-      .map(UserParser.parseUser)
-      .toDF()
+    if (userDataPath.toLowerCase().endsWith(XML)) {
+      sc.textFile(userDataPath, 2)
+        .map(_.trim)
+        .filter(UserParser.isValidRow)
+        .map(UserParser.parseUser)
+        .toDF()
+    } else {
+      sqlContext.read.parquet(userDataPath)
+    }
   }
 
   def getQuestionDataFrame(sc: SparkContext,
@@ -36,12 +40,16 @@ object DataFrameUtility {
     logger.debug("Creating Question DataFrame")
     val sqlContext = SQLContext.getOrCreate(sc)
     import sqlContext.implicits._
-    sc.textFile(postDataPath, 2)
-      .map(_.trim)
-      .filter(PostParser.isValidRow)
-      .filter(PostParser.isQuestion)
-      .map(PostParser.parseQuestion)
-      .toDF()
+    if (postDataPath.toLowerCase().endsWith(XML)) {
+      sc.textFile(postDataPath, 2)
+        .map(_.trim)
+        .filter(PostParser.isValidRow)
+        .filter(PostParser.isQuestion)
+        .map(PostParser.parseQuestion)
+        .toDF()
+    } else {
+      sqlContext.read.parquet(postDataPath)
+    }
   }
 
   def getAnswerDataFrame(sc: SparkContext,
@@ -49,12 +57,16 @@ object DataFrameUtility {
     logger.debug("Creating Answer DataFrame")
     val sqlContext = SQLContext.getOrCreate(sc)
     import sqlContext.implicits._
-    sc.textFile(postDataPath, 2)
-      .map(_.trim)
-      .filter(PostParser.isValidRow)
-      .filter(PostParser.isAnswer)
-      .map(PostParser.parseAnswer)
-      .toDF()
+    if (postDataPath.toLowerCase().endsWith(XML)) {
+      sc.textFile(postDataPath, 2)
+        .map(_.trim)
+        .filter(PostParser.isValidRow)
+        .filter(PostParser.isAnswer)
+        .map(PostParser.parseAnswer)
+        .toDF()
+    } else {
+      sqlContext.read.parquet(postDataPath)
+    }
   }
 
 }
