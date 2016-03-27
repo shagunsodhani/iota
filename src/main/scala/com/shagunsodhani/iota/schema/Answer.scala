@@ -1,7 +1,7 @@
 package com.shagunsodhani.iota.schema
 
 case class Answer (Id: Long, 
-    ParentID: Long,
+    ParentId: Long,
     CreationDate: String,
     Score: Long,
     ViewCount: Long,
