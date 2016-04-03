@@ -14,7 +14,8 @@ class TestDataFrameUtility {
 
   @Test
   def testDataFrame(): Unit = {
-      logger.debug("Testing if valid dataframes are created")
+    
+    logger.debug("Testing if valid dataframes are created")
     val sc = SparkContextUtils.getContext()
     
     val userDataPath = ConfigFactory.load.getString("user.data.path")
