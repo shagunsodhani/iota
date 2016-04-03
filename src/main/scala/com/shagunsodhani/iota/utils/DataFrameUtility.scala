@@ -16,11 +16,11 @@ object DataFrameUtility {
 
   private val logger: Logger = LoggerFactory.getLogger(getClass)
   private val XML = "xml"
-  private val userDataPath = ConfigFactory.load.getString("user.data.path")
-  private val postDataPath = ConfigFactory.load.getString("post.data.path")
+  private val _userDataPath = ConfigFactory.load.getString("user.data.path")
+  private val _postDataPath = ConfigFactory.load.getString("post.data.path")
 
   def getUserDataFrame(sc: SparkContext,
-                       userDataPath: String = userDataPath): DataFrame = {
+                       userDataPath: String = _userDataPath): DataFrame = {
     logger.debug("Creating User DataFrame")
     val sqlContext = SQLContext.getOrCreate(sc)
     import sqlContext.implicits._
@@ -36,7 +36,7 @@ object DataFrameUtility {
   }
 
   def getQuestionDataFrame(sc: SparkContext,
-                           postDataPath: String = postDataPath): DataFrame = {
+                           postDataPath: String = _postDataPath): DataFrame = {
     logger.debug("Creating Question DataFrame")
     val sqlContext = SQLContext.getOrCreate(sc)
     import sqlContext.implicits._
@@ -53,7 +53,7 @@ object DataFrameUtility {
   }
 
   def getAnswerDataFrame(sc: SparkContext,
-                         postDataPath: String = postDataPath): DataFrame = {
+                         postDataPath: String = _postDataPath): DataFrame = {
     logger.debug("Creating Answer DataFrame")
     val sqlContext = SQLContext.getOrCreate(sc)
     import sqlContext.implicits._
