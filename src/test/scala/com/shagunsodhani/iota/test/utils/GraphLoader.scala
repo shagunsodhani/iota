@@ -1,7 +1,6 @@
 package com.shagunsodhani.iota.test.utils
 
-import scala.annotation.elidable
-import scala.annotation.elidable.ASSERTION
+import java.io.File
 
 import org.apache.spark.graphx.Graph.graphToGraphOps
 import org.junit.Test
@@ -10,6 +9,7 @@ import org.slf4j.LoggerFactory
 
 import com.shagunsodhani.iota.utils.GraphLoader
 import com.shagunsodhani.iota.utils.SparkContextUtils
+import com.typesafe.config.ConfigFactory
 
 @Test
 class TestGraphLoader {
@@ -21,7 +21,11 @@ class TestGraphLoader {
     logger.debug("Testing if valid graph is created.")
     val sc = SparkContextUtils.getContext()
 
-    val userGraph = GraphLoader.getUserGraph(sc)
+    val config = ConfigFactory.parseFile(new File("src/main/resources/reference.conf.sample"))
+    val userDataPath = config.getString("user.data.path")
+    val postDataPath = config.getString("post.data.path")
+
+    val userGraph = GraphLoader.getUserGraph(sc, userDataPath, postDataPath, postDataPath)
     assert(userGraph.numEdges == 7)
     assert(userGraph.numVertices == 15)
   }
