@@ -41,7 +41,7 @@ object PostParser extends DataParser {
     val Tags: String = (xml \ "@Tags").text.toString
     val AnswerCount: Long = _parseAsLong(xml, "AnswerCount", -1)
     val CommentCount: Long = _parseAsLong(xml, "CommentCount", -1)
-    val FavoriteCount: Long = _parseAsLong(xml, "FavoriteCount", -1)
+    val FavoriteCount: Long = _parseAsLong(xml, "FavoriteCount", 0)
 
     Question(Id,
       AcceptedAnswerId,
