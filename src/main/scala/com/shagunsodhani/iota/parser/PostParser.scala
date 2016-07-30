@@ -25,7 +25,7 @@ object PostParser extends DataParser {
     logger.debug("Parsing row for question data")
     val xml: Elem = XML.loadString(row)
     val Id: Long = _parseAsLong(xml, "Id", -1)
-    val AcceptedAnswerId: Long = _parseAsLong(xml, "AcceptedAnswer", -1)
+    val AcceptedAnswerId: Long = _parseAsLong(xml, "AcceptedAnswerId", -1)
     val CreationDate: String = (xml \ "@CreationDate").text.toString
     val Score: Long = _parseAsLong(xml, "Score", Long.MinValue)
     val ViewCount: Long = _parseAsLong(xml, "ViewCount", Long.MinValue)
