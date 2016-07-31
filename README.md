@@ -27,7 +27,7 @@ For now only user and post schema are mapped. Other data (Badges, PostHistory et
 ## Demo:
 
 Checkout the sample Jupyter notebooks:
-* [using Ask Ubuntu Data](notebook/Exploratory Analysis for AskUbuntu User Data.ipynb).
+* [using Ask Ubuntu Data](notebook/AskUbuntu/User/ExploratoryAnalysis.ipynb).
 * [using StackOverflow Data](notebook/Exploratory Analysis for StackOverflow User Data.ipynb).
 
 ## Notes:
