@@ -73,4 +73,8 @@ project/plugins/project/
 
 src/main/resources/reference.conf
 data/*
-!data/sample*
+!data/sample*.xml
+metastore_db/*
+temp/*
+*/metastore_db/*
+*/.ipynb_checkpoints/*
