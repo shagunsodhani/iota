@@ -9,7 +9,7 @@ All the StackExchange sites use a common schema for their data. So a common pipe
 
 ##Setup
 
-1. Download [Spark](http://spark.apache.org/) 1.5.1 version.
+1. Download [Spark](http://spark.apache.org/) 1.6.1 version.
 2. Setup the `$SPARK_HOME` variable, pointing it to your spark installation.
 3. Download [StackExchange Data](https://archive.org/details/stackexchange).
 4. Clone this repo `git clone https://github.com/shagunsodhani/iota.git`
@@ -30,6 +30,8 @@ Checkout the sample Jupyter notebooks:
 * AskUbuntu
 	* [User Data](notebook/AskUbuntu/User/ExploratoryAnalysis.ipynb).
 	* [Word2Vec on Question Data](notebook/AskUbuntu/Question/Word2Vec.ipynb).
+	* [Tag Analysis on Question Data](notebook/AskUbuntu/Question/TagAnalysis.ipynb).
+	* [Exploratory Analysis on Question Data](notebook/AskUbuntu/User/ExploratoryAnalysis.ipynb).
 * [using StackOverflow Data](notebook/Exploratory Analysis for StackOverflow User Data.ipynb).
 
 ## Notes:
